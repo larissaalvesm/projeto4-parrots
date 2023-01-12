@@ -19,13 +19,20 @@ let cartas = document.querySelector('.cartas');
 
 cartas.innerHTML = '';
 
-for (let i = 0; i < qtdeCartas; i++) {
+for (let i = 0; i < qtdeCartas / 2; i++) {
     jogo.push(cartasJogo[i]);
     jogo.push(cartasJogo[i]);
+}
 
+jogo.sort(comparador);
+
+console.log(jogo);
+
+for (let i = 0; i < jogo.length; i++) {
     cartas.innerHTML = cartas.innerHTML + `
     <div class="carta">
         <img src="./img/back.png" />
         <img src="${jogo[i]}" class="escondido" />
     </div>`;
+
 }
