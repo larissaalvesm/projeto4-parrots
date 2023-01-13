@@ -26,13 +26,23 @@ for (let i = 0; i < qtdeCartas / 2; i++) {
 
 jogo.sort(comparador);
 
-console.log(jogo);
-
 for (let i = 0; i < jogo.length; i++) {
     cartas.innerHTML = cartas.innerHTML + `
-    <div class="carta">
-        <img src="./img/back.png" />
-        <img src="${jogo[i]}" class="escondido" />
+    <div data-test="card" class="carta" onclick="virarCarta(this)">
+        <img data-test="face-down-image" src="./img/back.png" />
+        <img src="${jogo[i]}" class="escondido" data-test="face-up-image"/>
     </div>`;
+
+}
+
+function virarCarta(cartaSelecionada) {
+
+    const costasCarta = cartaSelecionada.children[0];
+
+    costasCarta.classList.add("escondido");
+
+    const frenteCarta = cartaSelecionada.children[1];
+
+    frenteCarta.classList.remove("escondido");
 
 }
