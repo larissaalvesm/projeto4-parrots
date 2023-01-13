@@ -39,19 +39,12 @@ h1 {
     flex-wrap: wrap;
 }
 
-.cartas div {
+.carta {
     width: 117px;
     height: 146px;
     margin-right: 34px;
     margin-bottom: 34px;
-
-    background: #A7E9AF;
-    border: 1px solid #99CEA8;
-    border-radius: 5px;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    position: relative;
 }
 
 .cartas img {
@@ -59,8 +52,23 @@ h1 {
     height: 100px;
 }
 
-.escondido {
-    display: none;
+.face {
+    width: 100%;
+    height: 100%;
+    background-color: #A7E9AF;
+    border-radius: 5px;
+    box-shadow: 1px 1px 1px rgb(0 0 0 / 30%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    backface-visibility: hidden;
+    transition: all .5s;
+    transform-style: preserve-3d;
+}
+
+.back-face {
+    transform: rotateY(180deg);
 }
 
 @media (max-width: 335px) {

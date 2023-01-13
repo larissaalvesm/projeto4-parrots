@@ -14,7 +14,6 @@ while (isNaN(qtdeCartas) || qtdeCartas < 4 || qtdeCartas > 14 || (qtdeCartas % 2
     qtdeCartas = parseInt(prompt("Você quer jogar com quantas cartas?"));
 }
 
-
 let cartas = document.querySelector('.cartas');
 
 cartas.innerHTML = '';
@@ -29,20 +28,53 @@ jogo.sort(comparador);
 for (let i = 0; i < jogo.length; i++) {
     cartas.innerHTML = cartas.innerHTML + `
     <div data-test="card" class="carta" onclick="virarCarta(this)">
+        <div class="face" >
         <img data-test="face-down-image" src="./img/back.png" />
-        <img src="${jogo[i]}" class="escondido" data-test="face-up-image"/>
+        </div>
+        <div class="face back-face" >
+        <img id="gif" src="${jogo[i]}" data-test="face-up-image"/>
+        </div>
     </div>`;
 
 }
 
+let contador = 0;
+let jogadas = 0;
+let arrayFrenteCartas = [];
+let arrayCostasCartas = [];
+
 function virarCarta(cartaSelecionada) {
 
-    const costasCarta = cartaSelecionada.children[0];
+    if (contador < 2) {
+        const costasCarta = cartaSelecionada.children[0];
+        costasCarta.classList.add("back-face");
 
-    costasCarta.classList.add("escondido");
+        const frenteCarta = cartaSelecionada.children[1];
+        frenteCarta.classList.remove("back-face");
 
-    const frenteCarta = cartaSelecionada.children[1];
+        arrayCostasCartas.push(costasCarta);
+        arrayFrenteCartas.push(frenteCarta);
 
-    frenteCarta.classList.remove("escondido");
+        contador++;
+    }
 
+    setTimeout(desvirarCarta, 2000);
+
+    jogadas++;
+}
+
+function desvirarCarta() {
+    if (arrayFrenteCartas[0].innerHTML !== arrayFrenteCartas[1].innerHTML) {
+        arrayFrenteCartas[0].classList.add("back-face");
+        arrayCostasCartas[0].classList.remove("back-face");
+        arrayFrenteCartas[1].classList.add("back-face");
+        arrayCostasCartas[1].classList.remove("back-face");
+
+    }
+
+    if (contador === 2) {
+        contador = 0;
+        arrayFrenteCartas = [];
+        arrayCostasCartas = [];
+    }
 }
