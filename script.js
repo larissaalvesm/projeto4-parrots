@@ -32,7 +32,7 @@ for (let i = 0; i < jogo.length; i++) {
         <img data-test="face-down-image" src="./img/back.png" />
         </div>
         <div class="face back-face" >
-        <img id="gif" src="${jogo[i]}" data-test="face-up-image"/>
+        <img src="${jogo[i]}" data-test="face-up-image"/>
         </div>
     </div>`;
 
@@ -63,6 +63,8 @@ function virarCarta(cartaSelecionada) {
     jogadas++;
 }
 
+let cartasIguais = 0;
+
 function desvirarCarta() {
     if (arrayFrenteCartas[0].innerHTML !== arrayFrenteCartas[1].innerHTML) {
         arrayFrenteCartas[0].classList.add("back-face");
@@ -70,6 +72,11 @@ function desvirarCarta() {
         arrayFrenteCartas[1].classList.add("back-face");
         arrayCostasCartas[1].classList.remove("back-face");
 
+    } else {
+        cartasIguais++;
+        if (qtdeCartas / 2 === cartasIguais) {
+            alert(`Você ganhou em ${jogadas} jogadas!`);
+        }
     }
 
     if (contador === 2) {
